@@ -29,7 +29,7 @@ Product.init(
     },
     category_id: {
       type: DataTypes.INTEGER,
-      // reference category id
+      references: category_id
     }
   },
   {

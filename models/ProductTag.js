@@ -12,12 +12,12 @@ ProductTag.init(
       allowNull: false
     },
     product_id: {
-      type: DataTypes.INTEGER
-      //reference product id,}
+      type: DataTypes.INTEGER,
+      references: product.id
     },
     tag_id: {
       type: DataTypes.INTEGER,
-      //reference tags id
+      references: tag.id
     }
 
   },
