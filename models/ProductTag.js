@@ -9,15 +9,16 @@ ProductTag.init(
     //define
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      primaryKey: true
     },
     product_id: {
       type: DataTypes.INTEGER,
-      references: product.id
+      // references: product.id
     },
     tag_id: {
       type: DataTypes.INTEGER,
-      references: tag.id
+      // references: tag.id
     }
 
   },
