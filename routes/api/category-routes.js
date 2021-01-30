@@ -46,37 +46,30 @@ router.post('/', (req, res) => {
     id: req.body.id,
     category_name: req.body.category_name
   })
-  .then(dbCategoryData => res.json(dbCategoryData))
-  .catch(err => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+    .then(dbCategoryData => res.json(dbCategoryData))
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
+    });
 });
 
 router.put('/:id', (req, res) => {
-  // update a category by its `id` value
-  Category.update(req.body, {
-    where: {
-      id: req.body.id
+  Category.update(
+    {
+      category_name: req.body.category_name
+    },
+    {
+      where: {
+        id: req.params.id
+      }
     }
-  }).then(dbCategory => {
-    res.json(dbCategory);
-  });
-});
-
-router.delete('/:id', (req, res) => {
-  // delete a category by its `id` value
-  Category.destroy({
-    where: {
-      id: req.params.id
-    }
-  })
-    .then(dbCategory => {
-      if (!dbCategory) {
-        res.status(404).json({ message: 'no comment found with this id!' });
+  )
+    .then(dbCatData => {
+      if (!dbCatData) {
+        res.status(404).json({ message: 'No post found with this id' });
         return;
       }
-      res.json(dbCategory);
+      res.json(dbCatData);
     })
     .catch(err => {
       console.log(err);
@@ -84,4 +77,24 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-module.exports = router;
+  router.delete('/:id', (req, res) => {
+    // delete a category by its `id` value
+    Category.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+      .then(dbCategory => {
+        if (!dbCategory) {
+          res.status(404).json({ message: 'no comment found with this id!' });
+          return;
+        }
+        res.json(dbCategory);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+
+  module.exports = router;
