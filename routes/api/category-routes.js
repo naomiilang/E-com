@@ -84,12 +84,12 @@ router.put('/:id', (req, res) => {
         id: req.params.id
       }
     })
-      .then(dbCategory => {
-        if (!dbCategory) {
-          res.status(404).json({ message: 'no comment found with this id!' });
+      .then(dbCatData => {
+        if (!dbCatData) {
+          res.status(404).json({ message: 'No post found with this id' });
           return;
         }
-        res.json(dbCategory);
+        res.json(dbCatData);
       })
       .catch(err => {
         console.log(err);
